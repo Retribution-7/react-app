@@ -3,6 +3,7 @@ import { Catalog } from '@/widgets/Catalog';
 import { ContactForm } from '@/widgets/ContactForm';
 import { Header } from '@/widgets/Header/Header';
 import { Hero } from '@/widgets/Hero';
+import { Testimonials } from '@/widgets/Testimonials/Testimonials';
 
 export const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ export const HomePage = () => {
       <About />
       <Catalog />
       <ContactForm />
+      <Testimonials />
     </>
   );
 };
