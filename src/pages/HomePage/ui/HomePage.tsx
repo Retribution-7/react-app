@@ -1,3 +1,4 @@
+import { About } from '@/widgets/About';
 import { Header } from '@/widgets/Header/Header';
 import { Hero } from '@/widgets/Hero';
 
@@ -6,6 +7,7 @@ export const HomePage = () => {
     <>
       <Header />
       <Hero />
+      <About />
     </>
   );
 };
