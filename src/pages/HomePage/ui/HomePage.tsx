@@ -1,3 +1,5 @@
+import { Header } from '@/widgets/Header/Header';
+
 export const HomePage = () => {
-  return <div>SOSSOOOSSOSOOSOSOSOSOS</div>;
+  return <Header />;
 };
