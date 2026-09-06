@@ -1,6 +1,7 @@
 import { About } from '@/widgets/About';
 import { Catalog } from '@/widgets/Catalog';
 import { ContactForm } from '@/widgets/ContactForm';
+import { Footer } from '@/widgets/Footer';
 import { Header } from '@/widgets/Header/Header';
 import { Hero } from '@/widgets/Hero';
 import { Testimonials } from '@/widgets/Testimonials/Testimonials';
@@ -14,6 +15,7 @@ export const HomePage = () => {
       <Catalog />
       <ContactForm />
       <Testimonials />
+      <Footer />
     </>
   );
 };
