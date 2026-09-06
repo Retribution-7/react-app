@@ -1,0 +1,71 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --max-width-container: 1570px;
+
+  --color-surface: #ffffff;
+  --color-primary: #44444e;
+  --color-secondary: #69686f;
+  --color-button-first: #ffc400;
+  --color-button-second: #ff9900;
+  --color-bg-first: #f3f5f9;
+  --color-bg-second: #f8fafe;
+  --color-text-first: #4b4a53;
+  --color-text-second: #808086;
+  --color-text-third: #758499;
+  --color-white: #ffffff;
+  --color-123-first: #2e4156;
+  --color-123-second: #69809f;
+
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-inter: "Inter", system-ui, sans-serif;
+
+  --text-h1: 3.5rem;
+  --text-h1--line-height: 4.25rem;
+  --text-h1--font-weight: 400;
+  --text-h1--letter-spacing: 0;
+
+  --text-h2: 2.25rem;
+  --text-h2--line-height: 1.36;
+  --text-h2--font-weight: 400;
+
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 2.375rem;
+  --text-h3--font-weight: 400;
+
+  --text-h4: 1.375rem;
+  --text-h4--line-height: 1.875rem;
+  --text-h4--font-weight: 400;
+
+  --text-h5: 1.0625rem;
+  --text-h5--line-height: 1.8;
+  --text-h5--font-weight: 400;
+
+  --text-h6: 1rem;
+  --text-h6--line-height: 1;
+  --text-h6--font-weight: 400;
+
+  --text-body: 0.8125rem;
+  --text-body--line-height: 1.3;
+  --text-body--font-weight: 400;
+
+  --text-xs: 0.625rem;
+  --text-xs--line-height: 1;
+  --text-xs--font-weight: 400;
+
+  --breakpoint-3xl: 1660px;
+}
+
+.dark {
+  --color-surface: #1e293b;
+  --color-primary: #f1f5f9;
+  --color-secondary: #94a3b8;
+  --color-bg-first: #0f172a;
+  --color-bg-second: #1a2332;
+  --color-text-first: #e2e8f0;
+  --color-text-second: #94a3b8;
+  --color-text-third: #7c8fa6;
+  --color-white: #1e293b;
+  --color-123-first: #93c5fd;
+  --color-123-second: #7dd3fc;
+}
