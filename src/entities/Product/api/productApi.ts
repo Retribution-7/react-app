@@ -1,53 +1,67 @@
+import db from '@/../DB/db.json';
 import type { Product, ProductFilters } from '../model/types';
 
-export const API_BASE = '/api';
+const productsList: Product[] = Array.isArray(db)
+  ? (db as Product[])
+  : ((db as { products: Product[] }).products ?? []);
 
-/**
- * Загрузка списка товаров с фильтрацией, сортировкой и поиском.
- * @param filters - параметры фильтрации
- * @param signal - AbortSignal для отмены устаревших запросов в React
- */
 export const fetchProducts = async (
   filters: ProductFilters = {},
   signal?: AbortSignal,
 ): Promise<Product[]> => {
-  const params = new URLSearchParams();
+  if (signal?.aborted) {
+    throw new DOMException('Aborted', 'AbortError');
+  }
+
+  let result = [...productsList];
 
   if (filters.category) {
-    params.set('category', filters.category);
+    result = result.filter((product) => product.category === filters.category);
   }
-  if (filters._sort) {
-    params.set('_sort', filters._sort);
-  }
-  if (filters._order) {
-    params.set('_order', filters._order);
-  }
+
   if (filters.title_like) {
-    params.set('title_like', filters.title_like);
+    const search = filters.title_like.toLowerCase();
+    result = result.filter((product) => product.title?.toLowerCase().includes(search));
   }
 
-  const queryString = params.toString();
-  const url = `${API_BASE}/products${queryString ? `?${queryString}` : ''}`;
+  if (filters._sort) {
+    const sortField = filters._sort as keyof Product;
+    const isDesc = filters._order?.toLowerCase() === 'desc';
 
-  const res = await fetch(url, signal ? { signal } : undefined);
+    result.sort((a, b) => {
+      const valA = a[sortField];
+      const valB = b[sortField];
 
-  if (!res.ok) {
-    throw new Error('Ошибка загрузки товаров');
+      if (valA === valB) {
+        return 0;
+      }
+      if (valA == null) {
+        return 1;
+      }
+      if (valB == null) {
+        return -1;
+      }
+
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return isDesc ? valB.localeCompare(valA) : valA.localeCompare(valB);
+      }
+
+      return isDesc ? (valB as number) - (valA as number) : (valA as number) - (valB as number);
+    });
   }
 
-  return res.json() as Promise<Product[]>;
+  return result;
 };
 
 export const fetchProductById = async (
   id: number,
   signal?: AbortSignal,
 ): Promise<Product | null> => {
-  const res = await fetch(`${API_BASE}/products/${id}`, signal ? { signal } : undefined);
-  if (res.status === 404) {
-    return null;
+  if (signal?.aborted) {
+    throw new DOMException('Aborted', 'AbortError');
   }
-  if (!res.ok) {
-    throw new Error('Ошибка загрузки товара');
-  }
-  return res.json() as Promise<Product>;
+
+  const product = productsList.find((item) => Number(item.id) === Number(id));
+
+  return product || null;
 };

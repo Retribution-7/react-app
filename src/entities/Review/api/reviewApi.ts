@@ -1,10 +1,12 @@
-import { API_BASE } from '@/entities/Product/api/productApi';
+import db from '@/../DB/db.json';
 import type { Review } from '../model/types';
 
-export const fetchReviews = async (): Promise<Review[]> => {
-  const res = await fetch(`${API_BASE}/reviews`);
-  if (!res.ok) {
-    throw new Error('Ошибка загрузки отзывов');
+const reviewsList: Review[] = (db as { reviews?: Review[] }).reviews ?? [];
+
+export const fetchReviews = async (signal?: AbortSignal): Promise<Review[]> => {
+  if (signal?.aborted) {
+    throw new DOMException('Aborted', 'AbortError');
   }
-  return res.json() as Promise<Review[]>;
+
+  return [...reviewsList];
 };
