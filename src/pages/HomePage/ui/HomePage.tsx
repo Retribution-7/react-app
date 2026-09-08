@@ -4,7 +4,7 @@ import { ContactForm } from '@/widgets/ContactForm';
 import { Footer } from '@/widgets/Footer';
 import { Header } from '@/widgets/Header/Header';
 import { Hero } from '@/widgets/Hero';
-import { Testimonials } from '@/widgets/Testimonials/Testimonials';
+import { Testimonials } from '@/widgets/Testimonials';
 
 export const HomePage = () => {
   return (
