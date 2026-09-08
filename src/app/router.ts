@@ -4,6 +4,7 @@ import { AccountPage } from '@/pages/AccountPage';
 import { AdminPage } from '@/pages/AdminPage';
 import { AuthPage } from '@/pages/AuthPage';
 import { CartPage } from '@/pages/CartPage';
+import CatalogPage from '@/pages/CatalogPage/CatalogPage';
 import { FavoritesPage } from '@/pages/FavoritesPage';
 import { HomePage } from '@/pages/HomePage';
 import { ReviewsPage } from '@/pages/ReviewsPage';
@@ -40,5 +41,9 @@ export const router = createBrowserRouter([
   {
     path: '/admin',
     Component: AdminPage,
+  },
+  {
+    path: '/catalog',
+    Component: CatalogPage,
   },
 ]);

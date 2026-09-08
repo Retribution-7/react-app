@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router';
 import type { Review } from '@/entities/Review';
 import { fetchReviews } from '@/entities/Review/api/reviewApi';
 import {
@@ -211,11 +212,11 @@ export const Testimonials = () => {
         )}
 
         <div className="flex justify-center mt-4 lg:mt-8">
-          <a
-            href="#reviews"
+          <Link
+            to="/reviews"
             className="inline-flex items-center gap-2 rounded-full bg-bg-first border border-button-first px-6 py-3 lg:px-8 lg:py-[15px] font-sans text-[14px] sm:text-[15px] lg:text-[17px] leading-[1.4] text-primary transition-colors duration-200 hover:bg-surface cursor-pointer no-underline"
           >
-            <span>{'testimonials-all'}</span>
+            <span>{'Посмотреть все отзывы'}</span>
 
             <svg
               viewBox="0 0 16 16"
@@ -227,7 +228,7 @@ export const Testimonials = () => {
             >
               <path d="M6 3l5 5-5 5" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

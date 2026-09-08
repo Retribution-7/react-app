@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { cn } from '@/shared/lib';
 
 type CatalogButtonProps = {
@@ -5,10 +6,10 @@ type CatalogButtonProps = {
 };
 
 export const CatalogButton = ({ extraClass = '' }: CatalogButtonProps) => {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    document.getElementById('catalog')?.scrollIntoView({
-      behavior: 'smooth',
-    });
+    navigate('/catalog');
   };
 
   return (
