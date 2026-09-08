@@ -3,6 +3,7 @@ import { type Product, ProductCard, type ProductFilters } from '@/entities/Produ
 import { fetchProducts } from '@/entities/Product/api/productApi';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
 import { SkeletonGrid } from '@/shared/ui/Skeleton/Skeleton';
+import { ProductDetailModal } from '../ProductDetailModal/ProductDetailModal';
 import type { TabKey } from './model/constants';
 import { CatalogControls } from './ui/CatalogControls';
 import { CatalogTabs } from './ui/CatalogTabs';
@@ -18,7 +19,18 @@ export const Catalog = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 
+  // Храним ID открытого товара прямо в state (null — модалка закрыта)
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+
   const debouncedSearch = useDebounce(searchQuery, SEARCH_DEBOUNCE_MS);
+
+  const handleOpenDetails = (id: number) => {
+    setSelectedProductId(id);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProductId(null);
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -35,7 +47,6 @@ export const Catalog = () => {
 
       if (activeSort) {
         const [field, order] = activeSort.split(':');
-        // Проверяем наличие field и order для удовлетворения exactOptionalPropertyTypes
         if (field) {
           filters._sort = field;
         }
@@ -134,9 +145,17 @@ export const Catalog = () => {
 
           {!isLoading &&
             !isError &&
-            products.map((product) => <ProductCard key={product.id} product={product} />)}
+            products.map((product) => (
+              <ProductCard key={product.id} product={product} onOpenDetails={handleOpenDetails} />
+            ))}
         </div>
       </div>
+
+      <ProductDetailModal
+        isOpen={selectedProductId !== null}
+        productId={selectedProductId}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 };

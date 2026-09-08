@@ -1,0 +1,1 @@
+export const RELATED_PRODUCTS_LIMIT = 3;

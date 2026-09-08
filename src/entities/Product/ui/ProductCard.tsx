@@ -6,9 +6,10 @@ import { ProductDropdown } from './ProductDropdown';
 
 interface ProductCardProps {
   product: Product;
+  onOpenDetails?: (id: number) => void;
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, onOpenDetails }: ProductCardProps) => {
   const [color, setColor] = useState(product.color);
   const [thickness, setThickness] = useState(product.thickness);
   const [surface, setSurface] = useState(product.surface);
@@ -96,12 +97,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         >
           <span>Рассчитать стоимость</span>
         </button>
-        <a
-          href={`#product/${product.id}`}
+        <button
+          type="button"
+          onClick={() => product.id !== undefined && onOpenDetails?.(product.id)}
           className="self-start inline-flex items-center justify-center rounded-full bg-bg-first border border-button-first px-6 py-[15px] font-sans text-[17px] leading-[1.8] text-primary transition-colors duration-200 hover:bg-surface cursor-pointer no-underline"
         >
           <span>Подробнее</span>
-        </a>
+        </button>
       </div>
     </article>
   );
